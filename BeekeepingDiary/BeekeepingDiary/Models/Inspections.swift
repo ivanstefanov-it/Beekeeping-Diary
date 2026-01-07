@@ -11,12 +11,10 @@ struct Inspections {
     public var areEggsPresented: Bool
     public var areQueenCellsPresented: Bool
     public var areDroneCellsPresented: Bool
-    // how strong is the colony
     public var colonyStrenght: ColonyStrenght
     public var broodPattern: BroodPattern
     public var beeBehavior: BeeBehavior
-    // could be one or many (maybe create a enum with all variants)
-    public var pestsAndDiseases: Bool
+    public var pestsAndDiseases: PestsAndDiseases
     public var hiveHygiene: HiveHygiene
     public var swormingState: SwormState
     public var notes: String
@@ -26,18 +24,22 @@ struct Inspections {
     }
     
     enum BroodPattern {
-        
+        case solid, mostlySolid, spotty, other
     }
     
     enum BeeBehavior {
         case calm, aggressive
     }
     
+    enum PestsAndDiseases {
+        case smallHiveBeetle, waxMoths, hornetsAndWasps, ants, mice, robbery, varroaMites, other
+    }
+    
     enum HiveHygiene {
-        
+        case cleanHive, deadBeesOnBottomBoard, deadBeesInFeeder, deadBeesAtHiveEntrance, brownSpotsOnLandingBoard, foulOdor, excessiveBracingComb, americanFoulbrood, europeanFoulbrood
     }
     
     enum SwormState {
-        
+        case none, earlySigns, imminentSwarming, activeSwarming, postSwarm
     }
 }
