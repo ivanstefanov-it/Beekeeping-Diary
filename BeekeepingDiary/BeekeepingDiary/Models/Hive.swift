@@ -1,7 +1,8 @@
 import Foundation
 
-struct Hive {
-    public var inspections: [Inspections]
+struct Hive: Hashable, Identifiable {
+    let id = UUID()
+    public var inspections: [Inspections]?
     public var hiveType: HiveTypes
     public var numberOfFrames: Int
     // should be of type Image or something like this

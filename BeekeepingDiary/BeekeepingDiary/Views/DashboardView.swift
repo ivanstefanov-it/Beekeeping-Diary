@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct DashboardView: View {
-    var isEmpty: Bool = true
+    @State private var viewModel = DashboardViewModel()
     
     var body: some View {
         NavigationStack {
-            if isEmpty {
+            if viewModel.allApiaries.isEmpty {
                 HStack {
                     Button {
                         withAnimation(.smooth) {
@@ -21,7 +21,7 @@ struct DashboardView: View {
                     } label: {
                         HStack {
                             Text("Add new apiary")
-                                
+                            
                             Image(systemName: "flame")
                         }
                         .frame(width: 190, height: 46)
@@ -39,19 +39,27 @@ struct DashboardView: View {
                     }
                 }
             } else {
-                List(0..<100) { i in
-                    Text("Row \(i)")
+                List {
+                    ForEach(viewModel.allApiaries) { apiary in
+                        NavigationLink {
+                            ApiaryDetailView(apiary: apiary)
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(apiary.name)
+                                    .fontWeight(.bold)
+                                Text("number of hives: \(apiary.hives.count)")
+                            }
+                            .padding(.vertical, 8)
+                        }
+                    }
                 }
+                .listStyle(.plain)
                 .navigationTitle("Beekeeping diary")
                 .navigationBarTitleDisplayMode(.inline)
-//                List {
-//                    Section("Test") {
-//                     Text("hives")
-//                    }
-//                }
             }
-//            .navigationTitle("Beekeeping diary")
-//            .navigationBarTitleDisplayMode(.automatic)
+        }
+        .onAppear {
+            viewModel.load()
         }
     }
 }

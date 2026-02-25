@@ -1,6 +1,7 @@
 import Foundation
 
-struct Inspections {
+struct Inspections: Hashable, Identifiable {
+    let id = UUID()
     public var haveBrood: Bool
     public var haveQueen: Bool
     public var haveHoney: Bool
@@ -18,6 +19,7 @@ struct Inspections {
     public var hiveHygiene: HiveHygiene
     public var swormingState: SwormState
     public var notes: String
+    public var dateOfCreation: Date = .now
     
     enum ColonyStrenght {
         case weak, medium, strong
@@ -32,7 +34,7 @@ struct Inspections {
     }
     
     enum PestsAndDiseases {
-        case smallHiveBeetle, waxMoths, hornetsAndWasps, ants, mice, robbery, varroaMites, other
+        case smallHiveBeetle, waxMoths, hornetsAndWasps, ants, mice, robbery, varroaMites, other, none
     }
     
     enum HiveHygiene {

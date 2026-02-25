@@ -1,6 +1,7 @@
 import Foundation
 
-struct Apiary {
+struct Apiary: Hashable, Identifiable {
+    let id = UUID()
     public var name: String
     public var city: String
     public var registrationNumber: String
