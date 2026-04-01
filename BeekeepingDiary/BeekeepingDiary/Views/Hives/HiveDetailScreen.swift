@@ -7,28 +7,26 @@
 
 import SwiftUI
 
-struct HiveDetailView: View {
-    let hive: Hive
+struct HiveDetailScreen: View {
+    @State private var viewModel: HiveDetailViewModel
     @State private var isAddNewInspectionOpened = false
     
     init(hive: Hive) {
-        self.hive = hive
+        viewModel = HiveDetailViewModel(hive: hive)
     }
     
     var body: some View {
-//        Text(hive.hiveType.rawValue)
-//        Text(hive.numberOfFrames.description)
         NavigationStack {
             List {
                 Section {
                     Label("viewModel.apiary.name", systemImage: "leaf")
-                    Text(hive.hiveType.rawValue)
-                    Text(hive.numberOfFrames.description)
+                    Text(viewModel.hive.hiveType.rawValue)
+                    Text(viewModel.hive.numberOfFrames.description)
                 }
                 
-                if ((hive.inspections?.isEmpty) != nil) {
+                if (viewModel.hive.inspections.isEmpty) {
                     Section("Inspections") {
-                        ForEach(hive.inspections ?? []) { inspection in
+                        ForEach(viewModel.hive.inspections) { inspection in
                             NavigationLink {
 //                                InspectionDetailView(inspection: inspection)
                                 Text("InspectionDetailView")
@@ -54,15 +52,14 @@ struct HiveDetailView: View {
                 }
             }
             .sheet(isPresented: $isAddNewInspectionOpened) {
-//                AddNewInspectionView()
-                Text("AddNewInspectionView()")
+                AddNewInspectionScreen()
             }
         }
     }
 }
 
 #Preview {
-    HiveDetailView(
+    HiveDetailScreen(
         hive: .init(
             inspections: [.init(
                 haveBrood: true,
@@ -81,7 +78,8 @@ struct HiveDetailView: View {
                 pestsAndDiseases: .none,
                 hiveHygiene: .cleanHive,
                 swormingState: .none,
-                notes: "some Notes"
+                notes: "some Notes",
+                dateOfCreation: .now
             )],
             hiveType: .dadant,
             numberOfFrames: 10,

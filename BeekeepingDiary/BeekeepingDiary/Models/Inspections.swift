@@ -1,7 +1,9 @@
+import SwiftData
 import Foundation
 
-struct Inspections: Hashable, Identifiable {
-    let id = UUID()
+@Model
+class Inspections: Identifiable {
+    var id = UUID()
     public var haveBrood: Bool
     public var haveQueen: Bool
     public var haveHoney: Bool
@@ -19,29 +21,71 @@ struct Inspections: Hashable, Identifiable {
     public var hiveHygiene: HiveHygiene
     public var swormingState: SwormState
     public var notes: String
-    public var dateOfCreation: Date = .now
+    public var dateOfCreation: Date
     
-    enum ColonyStrenght {
+    public var hive: Hive?
+    
+    enum ColonyStrenght: Codable {
         case weak, medium, strong
     }
     
-    enum BroodPattern {
+    enum BroodPattern: Codable {
         case solid, mostlySolid, spotty, other
     }
     
-    enum BeeBehavior {
+    enum BeeBehavior: Codable {
         case calm, aggressive
     }
     
-    enum PestsAndDiseases {
+    enum PestsAndDiseases: Codable {
         case smallHiveBeetle, waxMoths, hornetsAndWasps, ants, mice, robbery, varroaMites, other, none
     }
     
-    enum HiveHygiene {
+    enum HiveHygiene: Codable {
         case cleanHive, deadBeesOnBottomBoard, deadBeesInFeeder, deadBeesAtHiveEntrance, brownSpotsOnLandingBoard, foulOdor, excessiveBracingComb, americanFoulbrood, europeanFoulbrood
     }
     
-    enum SwormState {
+    enum SwormState: Codable {
         case none, earlySigns, imminentSwarming, activeSwarming, postSwarm
+    }
+    
+    init(
+        haveBrood: Bool,
+        haveQueen: Bool,
+        haveHoney: Bool,
+        havePolen: Bool,
+        numbersOfFrames: Int,
+        haveFreeFrames: Bool,
+        numberOfFreeFrames: Int,
+        areEggsPresented: Bool,
+        areQueenCellsPresented: Bool,
+        areDroneCellsPresented: Bool,
+        colonyStrenght: ColonyStrenght,
+        broodPattern: BroodPattern,
+        beeBehavior: BeeBehavior,
+        pestsAndDiseases: PestsAndDiseases,
+        hiveHygiene: HiveHygiene,
+        swormingState: SwormState,
+        notes: String,
+        dateOfCreation: Date = .now
+    ) {
+        self.haveBrood = haveBrood
+        self.haveQueen = haveQueen
+        self.haveHoney = haveHoney
+        self.havePolen = havePolen
+        self.numbersOfFrames = numbersOfFrames
+        self.haveFreeFrames = haveFreeFrames
+        self.numberOfFreeFrames = numberOfFreeFrames
+        self.areEggsPresented = areEggsPresented
+        self.areQueenCellsPresented = areQueenCellsPresented
+        self.areDroneCellsPresented = areDroneCellsPresented
+        self.colonyStrenght = colonyStrenght
+        self.broodPattern = broodPattern
+        self.beeBehavior = beeBehavior
+        self.pestsAndDiseases = pestsAndDiseases
+        self.hiveHygiene = hiveHygiene
+        self.swormingState = swormingState
+        self.notes = notes
+        self.dateOfCreation = dateOfCreation
     }
 }

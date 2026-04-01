@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct BeekeepingDiaryApp: App {
     var body: some Scene {
         WindowGroup {
-            DashboardView()
+            ApiaryOverviewScreen()
         }
+        .modelContainer(for: [Apiary.self, Hive.self, Inspections.self])
     }
 }

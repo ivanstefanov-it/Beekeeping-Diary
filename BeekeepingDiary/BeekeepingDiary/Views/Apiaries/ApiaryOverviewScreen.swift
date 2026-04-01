@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct DashboardView: View {
-    @State private var viewModel = DashboardViewModel()
+struct ApiaryOverviewScreen: View {
+    @State private var viewModel = ApiaryOverviewViewModel()
     
     var body: some View {
         NavigationStack {
@@ -42,7 +42,7 @@ struct DashboardView: View {
                 List {
                     ForEach(viewModel.allApiaries) { apiary in
                         NavigationLink {
-                            ApiaryDetailView(apiary: apiary)
+                            ApiaryDetailScreen(apiary: apiary)
                         } label: {
                             VStack(alignment: .leading) {
                                 Text(apiary.name)
@@ -65,5 +65,5 @@ struct DashboardView: View {
 }
 
 #Preview {
-    DashboardView()
+    ApiaryOverviewScreen()
 }
