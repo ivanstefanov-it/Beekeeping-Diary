@@ -7,7 +7,7 @@ class Apiary: Identifiable {
     public var name: String
     public var city: String
     public var registrationNumber: String
-    public var hiveDescription: String
+    public var apiaryDescription: String
     
     @Relationship(deleteRule: .cascade)
     public var hives: [Hive]
@@ -16,13 +16,13 @@ class Apiary: Identifiable {
         name: String,
         city: String,
         registrationNumber: String,
-        hiveDescription: String,
+        apiaryDescription: String,
         hives: [Hive]
     ) {
         self.name = name
         self.city = city
         self.registrationNumber = registrationNumber
-        self.hiveDescription = hiveDescription
+        self.apiaryDescription = apiaryDescription
         self.hives = hives
     }
 }

@@ -47,7 +47,7 @@ class ApiaryOverviewViewModel {
                 name: "ApiaryName",
                 city: "Sofia",
                 registrationNumber: "123qwerty456",
-                hiveDescription: "Veri nice Apiary",
+                apiaryDescription: "Veri nice Apiary",
                 hives: [
                     .init(
                         inspections: [.init(
@@ -130,7 +130,7 @@ class ApiaryOverviewViewModel {
                 name: "SecondApiaryName",
                 city: "Plovdiv",
                 registrationNumber: "123qwerty456",
-                hiveDescription: "Veri hot Apiary",
+                apiaryDescription: "Veri hot Apiary",
                 hives: [
                     .init(
                         inspections: [.init(
@@ -238,7 +238,7 @@ class ApiaryOverviewViewModel {
                 name: "ThirdApiaryName",
                 city: "Varna",
                 registrationNumber: "123qwerty456",
-                hiveDescription: "Veri salty Apiary",
+                apiaryDescription: "Veri salty Apiary",
                 hives: [
                     .init(
                         inspections: [.init(

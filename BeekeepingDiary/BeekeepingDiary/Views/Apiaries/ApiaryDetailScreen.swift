@@ -22,7 +22,7 @@ struct ApiaryDetailScreen: View {
                     Label(viewModel.apiary.name, systemImage: "leaf")
                     Label(viewModel.apiary.city, systemImage: "mappin.and.ellipse")
                     Label(viewModel.apiary.registrationNumber, systemImage: "number")
-                    Label(viewModel.apiary.hiveDescription, systemImage: "text.alignleft")
+                    Label(viewModel.apiary.apiaryDescription, systemImage: "text.alignleft")
                     Label(viewModel.apiary.hives.count.description, systemImage: "square.grid.2x2")
                 }
                 
@@ -51,7 +51,7 @@ struct ApiaryDetailScreen: View {
             name: "Apiary Name",
             city: "Sofia",
             registrationNumber: "123qwerty456",
-            hiveDescription: "The best apiary",
+            apiaryDescription: "The best apiary",
             hives: [.init(
                 inspections: [.init(
                     haveBrood: false,
