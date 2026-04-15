@@ -1,10 +1,4 @@
-//
-//  DashboardViewModel.swift
-//  BeekeepingDiary
-//
-//  Created by Ivan Stefanov on 4.02.26.
-//
-
+import SwiftData
 import Foundation
 import Observation
 
@@ -14,12 +8,41 @@ class ApiaryOverviewViewModel {
     
     init() { }
     
-    func load() {
-        mockSomeInitialData()
+    func load(context: ModelContext) {
+        do {
+            let descriptor = FetchDescriptor<Apiary>()
+            let fetched = try context.fetch(descriptor)
+            
+            if fetched.isEmpty {
+                // 👉 Seed initial data ONLY ONCE
+                seedInitialData(context: context)
+                
+                // Fetch again after inserting
+                allApiaries = try context.fetch(descriptor)
+            } else {
+                allApiaries = fetched
+            }
+        } catch {
+            print("❌ Fetch failed:", error)
+        }
     }
     
-    private func mockSomeInitialData() {
-        allApiaries = [
+    private func seedInitialData(context: ModelContext) {
+        let apiaries = mockApiaries()
+        
+        for apiary in apiaries {
+            context.insert(apiary)
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("❌ Save failed:", error)
+        }
+    }
+    
+    private func mockApiaries() -> [Apiary] {
+        return [
             .init(
                 name: "ApiaryName",
                 city: "Sofia",

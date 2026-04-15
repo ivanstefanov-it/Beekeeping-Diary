@@ -1,36 +1,26 @@
-//
-//  ContentView.swift
-//  BeekeepingDiary
-//
-//  Created by Ivan Stefanov on 5.12.25.
-//
-
 import SwiftUI
+import SwiftData
 
 struct ApiaryOverviewScreen: View {
+    @Environment(\.modelContext) private var context
     @State private var viewModel = ApiaryOverviewViewModel()
-    
+
     var body: some View {
         NavigationStack {
             if viewModel.allApiaries.isEmpty {
                 HStack {
                     Button {
-                        withAnimation(.smooth) {
-                            print("Open add new apiary screen")
-                        }
+                        print("Open add new apiary screen")
                     } label: {
                         HStack {
                             Text("Add new apiary")
-                            
                             Image(systemName: "flame")
                         }
                         .frame(width: 190, height: 46)
                         .foregroundColor(.black)
                         .background(
                             LinearGradient(
-                                gradient: Gradient(
-                                    colors: [.pink, /*.cyan,*/ .indigo]
-                                ),
+                                colors: [.pink, .indigo],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -59,7 +49,7 @@ struct ApiaryOverviewScreen: View {
             }
         }
         .onAppear {
-            viewModel.load()
+            viewModel.load(context: context)
         }
     }
 }
