@@ -18,5 +18,11 @@ class CreateNewApiaryViewModel {
         )
         
         context.insert(apiary)
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save hive:", error)
+        }
     }
 }

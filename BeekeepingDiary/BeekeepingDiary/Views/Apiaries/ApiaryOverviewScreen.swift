@@ -3,11 +3,30 @@ import SwiftData
 
 struct ApiaryOverviewScreen: View {
     @Environment(\.modelContext) private var context
-    @State private var viewModel = ApiaryOverviewViewModel()
+//    @State private var viewModel = ApiaryOverviewViewModel()
+    @Query private var apiaries: [Apiary]
     @State private var isShowingCreateScreen = false
     
     var body: some View {
         NavigationStack {
+            List {
+                ForEach(apiaries) { apiary in
+                    NavigationLink {
+                        ApiaryDetailScreen(apiary: apiary)
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(apiary.name)
+                                .fontWeight(.bold)
+                            Text("number of hives: \(apiary.hives.count)")
+                        }
+                        .padding(.vertical, 8)
+                    }
+                }
+            }
+            .listStyle(.plain)
+            .navigationTitle("Beekeeping diary")
+            .navigationBarTitleDisplayMode(.inline)
+            
             HStack {
                 Button {
                     isShowingCreateScreen = true
@@ -28,27 +47,10 @@ struct ApiaryOverviewScreen: View {
                     .clipShape(.capsule)
                 }
             }
-            List {
-                ForEach(viewModel.allApiaries) { apiary in
-                    NavigationLink {
-                        ApiaryDetailScreen(apiary: apiary)
-                    } label: {
-                        VStack(alignment: .leading) {
-                            Text(apiary.name)
-                                .fontWeight(.bold)
-                            Text("number of hives: \(apiary.hives.count)")
-                        }
-                        .padding(.vertical, 8)
-                    }
-                }
-            }
-            .listStyle(.plain)
-            .navigationTitle("Beekeeping diary")
-            .navigationBarTitleDisplayMode(.inline)
         }
-        .onAppear {
-            viewModel.load(context: context)
-        }
+//        .onAppear {
+//            viewModel.load(context: context)
+//        }
         .sheet(isPresented: $isShowingCreateScreen) {
             NavigationStack {
                 CreateNewApiaryScreen()

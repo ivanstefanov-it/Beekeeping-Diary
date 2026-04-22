@@ -10,10 +10,7 @@ import SwiftUI
 struct ApiaryDetailScreen: View {
     
     @State private var viewModel: ApiaryDetailViewModel
-    
-    init(apiary: Apiary) {
-        viewModel = ApiaryDetailViewModel(apiary: apiary)
-    }
+    @State private var isAddNewHiveOpened: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -41,7 +38,25 @@ struct ApiaryDetailScreen: View {
                     }
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isAddNewHiveOpened.toggle()
+                    } label: {
+                        Text("Add new hive")
+                    }
+                }
+            }
+            .sheet(isPresented: $isAddNewHiveOpened) {
+                NavigationStack {
+                    AddNewHiveScreen(apiary: viewModel.apiary)
+                }
+            }
         }
+    }
+    
+    init(apiary: Apiary) {
+        viewModel = ApiaryDetailViewModel(apiary: apiary)
     }
 }
 

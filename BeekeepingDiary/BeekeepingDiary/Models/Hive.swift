@@ -14,20 +14,6 @@ class Hive: Identifiable {
     
     public var apiary: Apiary?
     
-    enum HiveTypes: String, CaseIterable, Codable {
-        case langstroth = "Langstroth Hive"
-        case topBar = "Top-Bar Hive"
-        case warre = "Warre Hive"
-        case dadant = "Dadant Hive"
-        case britishNational = "British National Hive"
-        case flow = "Flow Hive"
-        case layens = "Layens Hive"
-        case skep = "Skep Hive"
-        case longLangstroth = "Long Langstroth Hive"
-        case log = "Log (Gum) Hive"
-        case other = "Other"
-    }
-    
     init(
         inspections: [Inspections],
         hiveType: HiveTypes,
@@ -39,4 +25,18 @@ class Hive: Identifiable {
         self.numberOfFrames = numberOfFrames
         self.image = image
     }
+}
+
+enum HiveTypes: String, CaseIterable, Codable {
+    case langstroth = "Langstroth Hive"
+    case topBar = "Top-Bar Hive"
+    case warre = "Warre Hive"
+    case dadant = "Dadant Hive"
+    case britishNational = "British National Hive"
+    case flow = "Flow Hive"
+    case layens = "Layens Hive"
+    case skep = "Skep Hive"
+    case longLangstroth = "Long Langstroth Hive"
+    case log = "Log (Gum) Hive"
+    case other = "Other"
 }

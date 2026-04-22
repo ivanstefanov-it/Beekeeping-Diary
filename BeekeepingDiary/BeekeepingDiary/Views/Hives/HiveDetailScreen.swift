@@ -46,8 +46,7 @@ struct HiveDetailScreen: View {
                     Button {
                         isAddNewInspectionOpened.toggle()
                     } label: {
-                        Image(systemName: "plus.circle.fill")
-//                        Image(systemName: "plus")
+                        Text("Add new inspection")
                     }
                 }
             }
