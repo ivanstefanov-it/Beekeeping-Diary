@@ -6,8 +6,7 @@ class Hive: Identifiable {
     var id = UUID()
     public var hiveType: HiveTypes
     public var numberOfFrames: Int
-    // should be of type Image or something like this
-    public var image: String
+    public var image: Data?
     
     @Relationship(deleteRule: .cascade)
     public var inspections: [Inspections] = []
@@ -18,7 +17,7 @@ class Hive: Identifiable {
         inspections: [Inspections],
         hiveType: HiveTypes,
         numberOfFrames: Int,
-        image: String
+        image: Data? = nil
     ) {
         self.inspections = inspections
         self.hiveType = hiveType

@@ -82,7 +82,7 @@ struct HiveDetailScreen: View {
             )],
             hiveType: .dadant,
             numberOfFrames: 10,
-            image: "String"
+            image: nil
         )
     )
 }

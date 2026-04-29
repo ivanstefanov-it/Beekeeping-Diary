@@ -72,7 +72,7 @@ class ApiaryOverviewViewModel {
                     )],
                         hiveType: .dadant,
                         numberOfFrames: 10,
-                        image: "Image"
+                        image: nil
                     ),
                     .init(
                         inspections: [.init(
@@ -97,7 +97,7 @@ class ApiaryOverviewViewModel {
                         )],
                         hiveType: .dadant,
                         numberOfFrames: 10,
-                        image: "Image"
+                        image: nil
                     ),
                     .init(
                         inspections: [.init(
@@ -122,7 +122,7 @@ class ApiaryOverviewViewModel {
                         )],
                         hiveType: .dadant,
                         numberOfFrames: 10,
-                        image: "Image"
+                        image: nil
                     )
                 ]
             ),
@@ -155,7 +155,7 @@ class ApiaryOverviewViewModel {
                         )],
                         hiveType: .dadant,
                         numberOfFrames: 12,
-                        image: "Image"
+                        image: nil
                     ),
                     .init(
                         inspections: [.init(
@@ -180,7 +180,7 @@ class ApiaryOverviewViewModel {
                         )],
                         hiveType: .dadant,
                         numberOfFrames: 12,
-                        image: "Image"
+                        image: nil
                     ),
                     .init(
                         inspections: [.init(
@@ -205,7 +205,7 @@ class ApiaryOverviewViewModel {
                         )],
                         hiveType: .dadant,
                         numberOfFrames: 10,
-                        image: "Image"
+                        image: nil
                     ),
                     .init(
                         inspections: [.init(
@@ -230,7 +230,7 @@ class ApiaryOverviewViewModel {
                         )],
                         hiveType: .dadant,
                         numberOfFrames: 10,
-                        image: "Image"
+                        image: nil
                     )
                 ]
             ),
@@ -263,7 +263,7 @@ class ApiaryOverviewViewModel {
                         )],
                         hiveType: .dadant,
                         numberOfFrames: 8,
-                        image: "Image"
+                        image: nil
                     )
                 ]
             )

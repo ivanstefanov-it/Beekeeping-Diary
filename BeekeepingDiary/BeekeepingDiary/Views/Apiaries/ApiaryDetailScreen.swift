@@ -1,10 +1,3 @@
-//
-//  ApiaryDetailView.swift
-//  BeekeepingDiary
-//
-//  Created by Ivan Stefanov on 11.02.26.
-//
-
 import SwiftUI
 
 struct ApiaryDetailScreen: View {
@@ -28,12 +21,35 @@ struct ApiaryDetailScreen: View {
                         NavigationLink {
                             HiveDetailScreen(hive: hive)
                         } label: {
-                            VStack(alignment: .leading) {
-                                Text(hive.hiveType.rawValue)
-                                    .fontWeight(.bold)
-                                Text("number of frames: \(hive.numberOfFrames)")
+                            HStack {
+                                if let data = hive.image,
+                                   let uiImage = UIImage(data: data) {
+                                    
+                                    Image(uiImage: uiImage)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 60, height: 60)
+                                        .clipped()
+                                        .cornerRadius(8)
+                                    
+                                } else {
+                                    Image("default_image")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 60, height: 60)
+                                        .clipped()
+                                        .cornerRadius(8)
+                                }
+                                
+                                VStack(alignment: .leading) {
+                                    Text(hive.hiveType.rawValue)
+                                        .font(.title.bold())
+                                    Text("number of frames: \(hive.numberOfFrames)")
+                                        .font(.headline)
+                                        .foregroundStyle(.secondary)
+                                }
+                                .padding(.vertical, 8)
                             }
-                            .padding(.vertical, 8)
                         }
                     }
                 }
@@ -90,7 +106,7 @@ struct ApiaryDetailScreen: View {
                 )],
                 hiveType: .dadant,
                 numberOfFrames: 10,
-                image: ""
+                image: nil
             )]
         )
     )
