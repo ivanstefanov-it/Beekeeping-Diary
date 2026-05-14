@@ -12,7 +12,9 @@ import SwiftData
 struct BeekeepingDiaryApp: App {
     var body: some Scene {
         WindowGroup {
-            ApiaryOverviewScreen()
+            NavigationStack {
+                ApiaryOverviewScreen()
+            }
         }
         .modelContainer(for: [Apiary.self, Hive.self, Inspections.self])
     }

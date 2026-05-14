@@ -8,7 +8,7 @@ struct AddNewHiveScreen: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var viewModel = CreateNewHiveViewModel()
-    
+    @State private var cameraImage: UIImage?
     @State private var photosPickerItem: PhotosPickerItem?
     @State private var showPhotoPicker = false
     @State private var showCamera = false
@@ -77,7 +77,12 @@ struct AddNewHiveScreen: View {
             }
             .photosPicker(isPresented: $showPhotoPicker, selection: $photosPickerItem)
             .sheet(isPresented: $showCamera) {
-                ImagePicker(image: $viewModel.previewImage)
+                ImagePicker(image: $cameraImage)
+            }
+            .onChange(of: cameraImage) { _, newImage in
+                if let newImage {
+                    viewModel.setImage(newImage)
+                }
             }
             .confirmationDialog("Select Image Source", isPresented: $showSourceDialog) {
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {

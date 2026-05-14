@@ -1,10 +1,3 @@
-//
-//  HiveDetailView.swift
-//  BeekeepingDiary
-//
-//  Created by Ivan Stefanov on 25.02.26.
-//
-
 import SwiftUI
 
 struct HiveDetailScreen: View {
@@ -16,43 +9,43 @@ struct HiveDetailScreen: View {
     }
     
     var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    Label("viewModel.apiary.name", systemImage: "leaf")
-                    Text(viewModel.hive.hiveType.rawValue)
-                    Text(viewModel.hive.numberOfFrames.description)
-                }
-                
-                if (viewModel.hive.inspections.isEmpty) {
-                    Section("Inspections") {
-                        ForEach(viewModel.hive.inspections) { inspection in
-                            NavigationLink {
-//                                InspectionDetailView(inspection: inspection)
-                                Text("InspectionDetailView")
-                            } label: {
-                                VStack(alignment: .leading) {
-                                    Text(inspection.dateOfCreation.formatted())
-                                        .fontWeight(.bold)
-                                }
-                                .padding(.vertical, 8)
+        List {
+            Section {
+                Label("viewModel.apiary.name", systemImage: "leaf")
+                Text(viewModel.hive.hiveType.rawValue)
+                Text(viewModel.hive.numberOfFrames.description)
+            }
+            
+            if viewModel.hive.inspections.isEmpty {
+                Text("No inspections yet")
+            } else {
+                Section("Inspections") {
+                    ForEach(viewModel.hive.inspections) { inspection in
+                        NavigationLink {
+                            //                                InspectionDetailView(inspection: inspection)
+                            Text("InspectionDetailView")
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(inspection.dateOfCreation.formatted())
+                                    .fontWeight(.bold)
                             }
+                            .padding(.vertical, 8)
                         }
                     }
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        isAddNewInspectionOpened.toggle()
-                    } label: {
-                        Text("Add new inspection")
-                    }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    isAddNewInspectionOpened.toggle()
+                } label: {
+                    Text("Add new inspection")
                 }
             }
-            .sheet(isPresented: $isAddNewInspectionOpened) {
-                AddNewInspectionScreen()
-            }
+        }
+        .sheet(isPresented: $isAddNewInspectionOpened) {
+            AddNewInspectionScreen()
         }
     }
 }
