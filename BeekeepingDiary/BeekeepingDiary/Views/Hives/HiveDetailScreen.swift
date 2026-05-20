@@ -54,16 +54,16 @@ struct HiveDetailScreen: View {
     HiveDetailScreen(
         hive: .init(
             inspections: [.init(
-                haveBrood: true,
                 haveQueen: true,
-                haveHoney: true,
-                havePolen: true,
-                numbersOfFrames: 10,
-                haveFreeFrames: false,
-                numberOfFreeFrames: 0,
+                numbersOfOccupiedFrames: 10,
                 areEggsPresented: true,
                 areQueenCellsPresented: false,
                 areDroneCellsPresented: true,
+                numberOfFreeFrames: .none,
+                pollen: .none,
+                honey: .none,
+                cappedBrood: .none,
+                uncappedBrood: .none,
                 colonyStrenght: .medium,
                 broodPattern: .solid,
                 beeBehavior: .calm,
