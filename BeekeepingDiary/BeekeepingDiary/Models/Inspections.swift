@@ -54,25 +54,47 @@ class Inspections: Identifiable {
     }
     
     enum BeeBehavior: String, Codable, CaseIterable, Identifiable {
-        case calm, aggressive
+        case calm = "Calm"
+        case aggressive = "Aggressive"
         
         var id: Self { self }
     }
     
     enum PestsAndDiseases: String, Codable, CaseIterable, Identifiable {
-        case smallHiveBeetle, waxMoths, hornetsAndWasps, ants, mice, robbery, varroaMites, other, none
+        case smallHiveBeetle = "Small Hive Beetle"
+        case waxMoths = "Wax Moths"
+        case hornetsAndWasps = "Hornets and Wasps"
+        case ants = "Ants"
+        case mice = "Mice"
+        case robbery = "Robbery"
+        case varroaMites = "Varroa Mites"
+        case other = "Other"
+        case none = "None"
         
         var id: Self { self }
     }
     
     enum HiveHygiene: String, Codable, CaseIterable, Identifiable {
-        case cleanHive, deadBeesOnBottomBoard, deadBeesInFeeder, deadBeesAtHiveEntrance, brownSpotsOnLandingBoard, foulOdor, excessiveBracingComb, americanFoulbrood, europeanFoulbrood
+        case cleanHive = "Clean Hive"
+        case deadBeesOnBottomBoard = "Dead Bees On Bottom Board"
+        case deadBeesInFeeder = "Dead Bees In Feeder"
+        case deadBeesAtHiveEntrance = "Dead Bees At Hive Entrance"
+        case brownSpotsOnLandingBoard = "Brown Spots On Landing Board"
+        case foulOdor = "Foul Odor"
+        case excessiveBracingComb = "Excessive Bracing Comb"
+        case americanFoulbrood = "American Foul brood"
+        case europeanFoulbrood = "European Foul brood"
+        case other = "Other"
         
         var id: Self { self }
     }
     
     enum SwormState: String, Codable, CaseIterable, Identifiable {
-        case none, earlySigns, imminentSwarming, activeSwarming, postSwarm
+        case none = "None"
+        case earlySigns = "EarlySigns"
+        case imminentSwarming = "Imminent Swarming"
+        case activeSwarming = "ActiveSwarming"
+        case postSwarm = "Post Swarm"
         
         var id: Self { self }
     }
