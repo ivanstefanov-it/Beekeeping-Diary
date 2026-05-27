@@ -57,7 +57,7 @@ struct AddNewHiveScreen: View {
                         }
                     }
                     
-                    TextField("Number of frames", value: $viewModel.numberOfFrames, formatter: NumberFormatter())
+                    TextField("Number of frames", value: $viewModel.numberOfFrames, format: .number)
                         .keyboardType(.numberPad)
                 }
             }

@@ -5,69 +5,36 @@ struct AddNewInspectionScreen: View {
     
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 24) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Amount of frames occupied with bees")
+                        .font(.headline)
+                    
+                    //                    TextField("0", value: $viewModel.inspection.numbersOfOccupiedFrames, format: .number)
+                    //                        .keyboardType(.numberPad)
+                    //                        .padding()
+                    //                        .background(
+                    //                            RoundedRectangle(cornerRadius: 14)
+                    //                                .fill(Color.gray.opacity(0.1))
+                    //                        )
+                    
+                    Stepper(
+                        "\(viewModel.inspection.numbersOfOccupiedFrames)",
+                        value: $viewModel.inspection.numbersOfOccupiedFrames,
+                        in: 0...30
+                    )
+                    .padding()
+                }
                 
-                // The View should look like:
-                // TextField for how many frame are occupied with bees
-                // Slider for CappedBrood
-                // Slider for UncappedBrood
-                // Slider for Honey
-                // Slider for Pollen
-                // Slider for NumberOfFreeFrames
-                // Yes/No for Queen ✅
-                // Yes/No for Eggs ✅
-                // Yes/No for QueenCells ✅
-                // Yes/No for DroneCells ✅
-                // Menu for ColonyStrenght ✅
-                // Menu for BroodPattern ✅
-                // Menu for BeeBehavior ✅
-                // Menu for Pets ✅
-                // Menu for HiveHigiene ✅
-                // Menu for SwarmState  ✅
-                // TextField for Notes
-                // DatePicker for DateOfCreation
+                frameCountSection(title: "Capped Brood", subtitle: "How many frames have capped brood?", selection: $viewModel.inspection.cappedBrood)
                 
+                frameCountSection(title: "Uncapped Brood", subtitle: "How many frames have uncapped brood?", selection: $viewModel.inspection.uncappedBrood)
                 
-                // ✅ TODO: Extract this chips into a component
-//                VStack(alignment: .leading, spacing: 20) {
-//                    Text("Free space")
-//                        .font(.title3.bold())
-//
-//                    Text("How many frames have free space left?")
-//                        .foregroundStyle(.secondary)
-//
-//                    ScrollView(.horizontal, showsIndicators: false) {
-//                        HStack(spacing: 10) {
-//                            ForEach(Inspections.ColonyStrenght.allCases) { option in
-//                                let isSelected = viewModel.inspection.colonyStrenght == option
-//
-//                                Button {
-//                                    withAnimation(.smooth(duration: 0.2)) {
-//                                        viewModel.inspection.colonyStrenght = option
-//                                    }
-//                                } label: {
-//                                    Text(option.rawValue)
-//                                        .font(.subheadline.weight(.medium))
-//                                        .foregroundStyle(
-//                                            isSelected ? .white : .primary
-//                                        )
-//                                        .padding(.horizontal, 18)
-//                                        .padding(.vertical, 12)
-//                                        .background(
-//                                            Capsule()
-//                                                .fill(
-//                                                    isSelected
-//                                                    ? Color.orange
-//                                                    : Color.gray.opacity(0.12)
-//                                                )
-//                                        )
-//                                }
-//                                .buttonStyle(.plain)
-//                            }
-//                        }
-//                    }
-//                }
-                // ✅
+                frameCountSection(title: "Honey", subtitle: "How many frames contain honey?", selection: $viewModel.inspection.honey)
+                
+                frameCountSection(title: "Polen", subtitle: "How many frames contain pollen?", selection: $viewModel.inspection.pollen)
+                
+                frameCountSection(title: "Free space", subtitle: "How many frames have free space left?", selection: $viewModel.inspection.numberOfFreeFrames)
                 
                 HStack {
                     Text("Is the queen presented?")
@@ -116,7 +83,7 @@ struct AddNewInspectionScreen: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("How strong do you estimate the colony?")
                         .font(.title3.bold())
-
+                    
                     Menu {
                         ForEach(Inspections.ColonyStrenght.allCases) { option in
                             Button {
@@ -129,14 +96,14 @@ struct AddNewInspectionScreen: View {
                         HStack {
                             Text(viewModel.inspection.colonyStrenght?.rawValue
                                  ?? "Select...")
-                                .foregroundStyle(
-                                    viewModel.inspection.colonyStrenght == nil
-                                    ? .secondary
-                                    : .primary
-                                )
-
+                            .foregroundStyle(
+                                viewModel.inspection.colonyStrenght == nil
+                                ? .secondary
+                                : .primary
+                            )
+                            
                             Spacer()
-
+                            
                             Image(systemName: "chevron.down")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -150,7 +117,7 @@ struct AddNewInspectionScreen: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Brood pattern")
                         .font(.title3.bold())
-
+                    
                     Menu {
                         ForEach(Inspections.BroodPattern.allCases) { option in
                             Button {
@@ -163,14 +130,14 @@ struct AddNewInspectionScreen: View {
                         HStack {
                             Text(viewModel.inspection.broodPattern?.rawValue
                                  ?? "Select...")
-                                .foregroundStyle(
-                                    viewModel.inspection.broodPattern == nil
-                                    ? .secondary
-                                    : .primary
-                                )
-
+                            .foregroundStyle(
+                                viewModel.inspection.broodPattern == nil
+                                ? .secondary
+                                : .primary
+                            )
+                            
                             Spacer()
-
+                            
                             Image(systemName: "chevron.down")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -184,7 +151,7 @@ struct AddNewInspectionScreen: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Bee behavior")
                         .font(.title3.bold())
-
+                    
                     Menu {
                         ForEach(Inspections.BeeBehavior.allCases) { option in
                             Button {
@@ -197,14 +164,14 @@ struct AddNewInspectionScreen: View {
                         HStack {
                             Text(viewModel.inspection.beeBehavior?.rawValue
                                  ?? "Select...")
-                                .foregroundStyle(
-                                    viewModel.inspection.beeBehavior == nil
-                                    ? .secondary
-                                    : .primary
-                                )
-
+                            .foregroundStyle(
+                                viewModel.inspection.beeBehavior == nil
+                                ? .secondary
+                                : .primary
+                            )
+                            
                             Spacer()
-
+                            
                             Image(systemName: "chevron.down")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -218,7 +185,7 @@ struct AddNewInspectionScreen: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Pets and diseases")
                         .font(.title3.bold())
-
+                    
                     Menu {
                         ForEach(Inspections.PestsAndDiseases.allCases) { option in
                             Button {
@@ -231,14 +198,14 @@ struct AddNewInspectionScreen: View {
                         HStack {
                             Text(viewModel.inspection.pestsAndDiseases?.rawValue
                                  ?? "Select...")
-                                .foregroundStyle(
-                                    viewModel.inspection.pestsAndDiseases == nil
-                                    ? .secondary
-                                    : .primary
-                                )
-
+                            .foregroundStyle(
+                                viewModel.inspection.pestsAndDiseases == nil
+                                ? .secondary
+                                : .primary
+                            )
+                            
                             Spacer()
-
+                            
                             Image(systemName: "chevron.down")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -252,7 +219,7 @@ struct AddNewInspectionScreen: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Hive higiene")
                         .font(.title3.bold())
-
+                    
                     Menu {
                         ForEach(Inspections.HiveHygiene.allCases) { option in
                             Button {
@@ -265,14 +232,14 @@ struct AddNewInspectionScreen: View {
                         HStack {
                             Text(viewModel.inspection.hiveHygiene?.rawValue
                                  ?? "Select...")
-                                .foregroundStyle(
-                                    viewModel.inspection.hiveHygiene == nil
-                                    ? .secondary
-                                    : .primary
-                                )
-
+                            .foregroundStyle(
+                                viewModel.inspection.hiveHygiene == nil
+                                ? .secondary
+                                : .primary
+                            )
+                            
                             Spacer()
-
+                            
                             Image(systemName: "chevron.down")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -286,7 +253,7 @@ struct AddNewInspectionScreen: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Swarm state")
                         .font(.title3.bold())
-
+                    
                     Menu {
                         ForEach(Inspections.SwormState.allCases) { option in
                             Button {
@@ -299,14 +266,14 @@ struct AddNewInspectionScreen: View {
                         HStack {
                             Text(viewModel.inspection.swormingState?.rawValue
                                  ?? "Select...")
-                                .foregroundStyle(
-                                    viewModel.inspection.swormingState == nil
-                                    ? .secondary
-                                    : .primary
-                                )
-
+                            .foregroundStyle(
+                                viewModel.inspection.swormingState == nil
+                                ? .secondary
+                                : .primary
+                            )
+                            
                             Spacer()
-
+                            
                             Image(systemName: "chevron.down")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -316,16 +283,65 @@ struct AddNewInspectionScreen: View {
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
                 }
+                
+                TextField("Notes", text: $viewModel.inspection.notes,  axis: .vertical)
+                    .lineLimit(5...10)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(Color.gray.opacity(0.1))
+                    )
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding()
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        // Add to the list of inspections
-                    }, label: {
-                        Text("Add")
-                    })
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: {
+                    // Add to the list of inspections
+                }, label: {
+                    Text("Add")
+                })
+            }
+        }
+    }
+    
+    func frameCountSection(title: String, subtitle: String, selection: Binding<Inspections.FramesCount>) -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text(title)
+                .font(.title3.bold())
+            
+            Text(subtitle)
+                .foregroundStyle(.secondary)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(Inspections.FramesCount.allCases) { option in
+                        let isSelected = selection.wrappedValue == option
+                        
+                        Button {
+                            withAnimation(.smooth(duration: 0.2)) {
+                                selection.wrappedValue = option
+                            }
+                        } label: {
+                            Text(option.rawValue)
+                                .font(.subheadline.weight(.medium))
+                                .foregroundStyle(
+                                    isSelected ? .white : .primary
+                                )
+                                .padding(.horizontal, 18)
+                                .padding(.vertical, 12)
+                                .background(
+                                    Capsule()
+                                        .fill(
+                                            isSelected
+                                            ? Color.orange
+                                            : Color.gray.opacity(0.12)
+                                        )
+                                )
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
             }
         }
@@ -335,70 +351,3 @@ struct AddNewInspectionScreen: View {
 #Preview {
     AddNewInspectionScreen()
 }
-
-//
-//import SwiftUI
-//
-//enum FreeSpace: String, CaseIterable, Identifiable {
-//    case none = "None"
-//    case oneFrame = "One frame"
-//    case fewFrames = "Few frames"
-//    case severalFrames = "Several frames"
-//    case manyFrames = "Many frames"
-//    case all = "All"
-//
-//    var id: Self { self }
-//}
-//
-//struct ContentView: View {
-//
-//    @State private var selected: FreeSpace = .none
-//
-//    var body: some View {
-//
-//        VStack(alignment: .leading, spacing: 20) {
-//            Text("Free space")
-//                .font(.title3.bold())
-//
-//            Text("How many frames have free space left?")
-//                .foregroundStyle(.secondary)
-//
-//            ScrollView(.horizontal, showsIndicators: false) {
-//                HStack(spacing: 10) {
-//                    ForEach(FreeSpace.allCases) { option in
-//
-//                        let isSelected = selected == option
-//
-//                        Button {
-//                            withAnimation(.smooth(duration: 0.2)) {
-//                                selected = option
-//                            }
-//                        } label: {
-//                            Text(option.rawValue)
-//                                .font(.subheadline.weight(.medium))
-//                                .foregroundStyle(
-//                                    isSelected ? .white : .primary
-//                                )
-//                                .padding(.horizontal, 18)
-//                                .padding(.vertical, 12)
-//                                .background(
-//                                    Capsule()
-//                                        .fill(
-//                                            isSelected
-//                                            ? Color.orange
-//                                            : Color.gray.opacity(0.12)
-//                                        )
-//                                )
-//                        }
-//                        .buttonStyle(.plain)
-//                    }
-//                }
-//            }
-//        }
-//        .padding()
-//    }
-//}
-//
-//#Preview {
-//    ContentView()
-//}
