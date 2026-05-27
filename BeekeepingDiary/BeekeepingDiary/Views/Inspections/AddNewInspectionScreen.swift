@@ -1,7 +1,10 @@
 import SwiftUI
 
 struct AddNewInspectionScreen: View {
-    @State private var viewModel = CreateNewInspectionViewModel()
+    let hive: Hive
+    @State private var viewModel: CreateNewInspectionViewModel
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) private var context
     
     var body: some View {
         ScrollView {
@@ -295,15 +298,27 @@ struct AddNewInspectionScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding()
         }
+        .navigationTitle("New Inspection")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button(action: {
-                    // Add to the list of inspections
-                }, label: {
-                    Text("Add")
-                })
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") { dismiss() }
+            }
+            
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Save") {
+                    viewModel.save(context: context)
+                    dismiss()
+                }
             }
         }
+    }
+    
+    init(hive: Hive) {
+        self.hive = hive
+        _viewModel = State(
+                initialValue: CreateNewInspectionViewModel(hive: hive)
+            )
     }
     
     func frameCountSection(title: String, subtitle: String, selection: Binding<Inspections.FramesCount>) -> some View {
@@ -349,5 +364,5 @@ struct AddNewInspectionScreen: View {
 }
 
 #Preview {
-    AddNewInspectionScreen()
+    AddNewInspectionScreen(hive: .init(inspections: [], hiveType: .dadant, numberOfFrames: 10))
 }

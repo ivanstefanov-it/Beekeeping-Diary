@@ -45,7 +45,9 @@ struct HiveDetailScreen: View {
             }
         }
         .sheet(isPresented: $isAddNewInspectionOpened) {
-            AddNewInspectionScreen()
+            NavigationStack {
+                AddNewInspectionScreen(hive: viewModel.hive)
+            }
         }
     }
 }
