@@ -22,7 +22,9 @@ struct ApiaryOverviewScreen: View {
                 }
             }
             .onDelete { item in
-                viewModel.delete(modelContext: modelContext, item, apiaries: apiaries)
+                withAnimation {
+                    viewModel.delete(modelContext: modelContext, item, apiaries: apiaries)
+                }
             }
         }
         .listStyle(.plain)

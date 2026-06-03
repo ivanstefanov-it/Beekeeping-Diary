@@ -5,10 +5,6 @@ struct HiveDetailScreen: View {
     @State private var isAddNewInspectionOpened = false
     @Environment(\.modelContext) private var modelContext
     
-    init(hive: Hive) {
-        viewModel = HiveDetailViewModel(hive: hive)
-    }
-    
     var body: some View {
         List {
             Section {
@@ -23,8 +19,7 @@ struct HiveDetailScreen: View {
                 Section("Inspections") {
                     ForEach(viewModel.hive.inspections) { inspection in
                         NavigationLink {
-                            //                                InspectionDetailView(inspection: inspection)
-                            Text("InspectionDetailView")
+                            InspectionDetailView(inspection: inspection)
                         } label: {
                             VStack(alignment: .leading) {
                                 Text(inspection.dateOfCreation.formatted())
@@ -55,6 +50,10 @@ struct HiveDetailScreen: View {
                 AddNewInspectionScreen(hive: viewModel.hive)
             }
         }
+    }
+    
+    init(hive: Hive) {
+        viewModel = HiveDetailViewModel(hive: hive)
     }
 }
 
