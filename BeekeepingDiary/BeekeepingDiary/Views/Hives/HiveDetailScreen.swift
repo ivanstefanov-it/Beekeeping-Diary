@@ -3,6 +3,7 @@ import SwiftUI
 struct HiveDetailScreen: View {
     @State private var viewModel: HiveDetailViewModel
     @State private var isAddNewInspectionOpened = false
+    @Environment(\.modelContext) private var modelContext
     
     init(hive: Hive) {
         viewModel = HiveDetailViewModel(hive: hive)
@@ -31,6 +32,9 @@ struct HiveDetailScreen: View {
                             }
                             .padding(.vertical, 8)
                         }
+                    }
+                    .onDelete { item in
+                        viewModel.delete(modelContext: modelContext, item)
                     }
                 }
             }
