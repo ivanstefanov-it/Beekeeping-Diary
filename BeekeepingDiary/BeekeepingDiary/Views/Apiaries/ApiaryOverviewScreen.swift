@@ -2,9 +2,9 @@ import SwiftUI
 import SwiftData
 
 struct ApiaryOverviewScreen: View {
-    @Environment(\.modelContext) private var context
-//    @State private var viewModel = ApiaryOverviewViewModel()
-    @Query private var apiaries: [Apiary]
+    @Environment(\.modelContext) private var modelContext
+    @State private var viewModel = ApiaryOverviewViewModel()
+    @Query private var apiaries: [Apiary] //✅
     @State private var isShowingCreateScreen = false
     
     var body: some View {
@@ -21,10 +21,12 @@ struct ApiaryOverviewScreen: View {
                     .padding(.vertical, 8)
                 }
             }
+            .onDelete { item in
+                viewModel.delete(modelContext: modelContext, item, apiaries: apiaries)
+            }
         }
         .listStyle(.plain)
         .navigationTitle("Beekeeping diary")
-        .navigationBarTitleDisplayMode(.inline)
         
         HStack {
             Button {
