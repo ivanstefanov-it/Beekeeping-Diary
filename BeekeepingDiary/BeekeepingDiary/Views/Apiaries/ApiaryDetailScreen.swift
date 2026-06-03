@@ -4,6 +4,7 @@ struct ApiaryDetailScreen: View {
     
     @State private var viewModel: ApiaryDetailViewModel
     @State private var isAddNewHiveOpened: Bool = false
+    @Environment(\.modelContext) var modelContext
     
     var body: some View {
         List {
@@ -49,6 +50,11 @@ struct ApiaryDetailScreen: View {
                             }
                             .padding(.vertical, 8)
                         }
+                    }
+                }
+                .onDelete { item in
+                    withAnimation {
+                        viewModel.delete(modelContext: modelContext, item)
                     }
                 }
             }

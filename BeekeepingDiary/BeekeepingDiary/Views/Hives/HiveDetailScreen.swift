@@ -34,7 +34,9 @@ struct HiveDetailScreen: View {
                         }
                     }
                     .onDelete { item in
-                        viewModel.delete(modelContext: modelContext, item)
+                        withAnimation {
+                            viewModel.delete(modelContext: modelContext, item)
+                        }
                     }
                 }
             }
