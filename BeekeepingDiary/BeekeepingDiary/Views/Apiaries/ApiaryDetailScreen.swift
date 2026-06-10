@@ -3,67 +3,118 @@ import SwiftUI
 struct ApiaryDetailScreen: View {
     
     @State private var viewModel: ApiaryDetailViewModel
-    @State private var isAddNewHiveOpened: Bool = false
+    @State private var isAddNewHiveOpened = false
     @Environment(\.modelContext) var modelContext
     
     var body: some View {
-        List {
-            Section {
-                Label(viewModel.apiary.name, systemImage: "leaf")
-                Label(viewModel.apiary.city, systemImage: "mappin.and.ellipse")
-                Label(viewModel.apiary.registrationNumber, systemImage: "number")
-                Label(viewModel.apiary.hives.count.description, systemImage: "square.grid.2x2")
-            }
-            
-            Section("Hives") {
-                ForEach(viewModel.sortedHivesByFrames) { hive in
-                    NavigationLink {
-                        HiveDetailScreen(hive: hive)
-                    } label: {
-                        HStack {
-                            if let data = hive.image,
-                               let uiImage = UIImage(data: data) {
-                                
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 60, height: 60)
-                                    .clipped()
-                                    .cornerRadius(8)
-                                
-                            } else {
-                                Image("default_image")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 60, height: 60)
-                                    .clipped()
-                                    .cornerRadius(8)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+
+                // Apiary card
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack(alignment: .top) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(viewModel.apiary.name)
+                                .font(.title3.bold())
+
+                            Text("\(viewModel.apiary.city) • Hives: \(viewModel.apiary.hives.count)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+
+                        Spacer()
+
+                        Image(systemName: "box.truck.fill")
+                            .foregroundColor(.white)
+                            .padding(8)
+                            .background(Color.blue)
+                            .clipShape(Circle())
+                    }
+
+                    Text("Reg. No. \(viewModel.apiary.registrationNumber)")
+                        .foregroundColor(.secondary)
+                }
+                .padding(24)
+                .background(
+                    RoundedRectangle(cornerRadius: 24)
+                        .fill(Color(.secondarySystemGroupedBackground))
+                )
+                .padding(.horizontal)
+
+                // Hives section
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Hives")
+                        .font(.title2.bold())
+                        .padding(.horizontal)
+
+                    LazyVStack(spacing: 12) {
+                        ForEach(viewModel.sortedHivesByFrames) { hive in
+                            NavigationLink {
+                                HiveDetailScreen(hive: hive)
+                            } label: {
+                                HStack(spacing: 12) {
+
+                                    if let data = hive.image,
+                                       let uiImage = UIImage(data: data) {
+
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 60, height: 60)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+
+                                    } else {
+                                        Image("default_image")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 60, height: 60)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                    }
+
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(hive.hiveType.rawValue)
+                                            .font(.headline)
+
+                                        Text("Number of frames: \(hive.numberOfFrames)")
+                                            .font(.subheadline)
+                                            .foregroundStyle(.secondary)
+                                    }
+
+                                    Spacer()
+                                }
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color(.secondarySystemGroupedBackground))
+                                )
+                                .padding(.horizontal)
                             }
-                            
-                            VStack(alignment: .leading) {
-                                Text(hive.hiveType.rawValue)
-                                    .font(.title.bold())
-                                Text("number of frames: \(hive.numberOfFrames)")
-                                    .font(.headline)
-                                    .foregroundStyle(.secondary)
+                            .buttonStyle(.plain)
+                            .contextMenu {
+                                Button(role: .destructive) {
+                                    if let index = viewModel.sortedHivesByFrames.firstIndex(where: { $0.id == hive.id }) {
+                                        withAnimation {
+                                            viewModel.delete(
+                                                modelContext: modelContext,
+                                                IndexSet(integer: index)
+                                            )
+                                        }
+                                    }
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
                             }
-                            .padding(.vertical, 8)
                         }
                     }
                 }
-                .onDelete { item in
-                    withAnimation {
-                        viewModel.delete(modelContext: modelContext, item)
-                    }
-                }
             }
+            .padding(.top)
         }
+        .background(Color(.systemGroupedBackground))
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
+                Button("Add new hive") {
                     isAddNewHiveOpened.toggle()
-                } label: {
-                    Text("Add new hive")
                 }
             }
         }
@@ -73,9 +124,9 @@ struct ApiaryDetailScreen: View {
             }
         }
     }
-    
+
     init(apiary: Apiary) {
-        viewModel = ApiaryDetailViewModel(apiary: apiary)
+        _viewModel = State(initialValue: ApiaryDetailViewModel(apiary: apiary))
     }
 }
 
