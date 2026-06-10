@@ -8,6 +8,7 @@ struct ApiaryOverviewScreen: View {
     @State private var isShowingCreateScreen = false
     
     var body: some View {
+        let _ = print(URL.applicationSupportDirectory.path())
         List {
             ForEach(apiaries) { apiary in
                 NavigationLink {

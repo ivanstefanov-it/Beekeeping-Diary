@@ -122,7 +122,6 @@ struct AddNewHiveScreen: View {
             name: "Apiary name",
             city: "Sofia",
             registrationNumber: "1233121",
-            apiaryDescription: "This is verry nice apiary",
             hives: [.init(
                 inspections: [.init(
                     haveQueen: false,

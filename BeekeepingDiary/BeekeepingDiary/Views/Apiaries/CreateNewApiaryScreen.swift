@@ -17,8 +17,6 @@ struct CreateNewApiaryScreen: View {
                 .focused($isNameFocused)
             TextField("Enter a city", text: $viewModel.city)
             TextField("Registration Number", text: $viewModel.registrationNumber)
-            TextField("Add some description", text: $viewModel.apiaryDescription, axis: .vertical)
-                .lineLimit(5...10)
         }
         .navigationTitle("New Apiary")
         .navigationBarTitleDisplayMode(.inline)
