@@ -4,14 +4,16 @@ import Foundation
 @Model
 class Hive: Identifiable {
     var id = UUID()
-    public var hiveType: HiveTypes
-    public var numberOfFrames: Int
-    public var image: Data?
+    var hiveType: HiveTypes
+    var numberOfFrames: Int
+    var image: Data?
     
     @Relationship(deleteRule: .cascade)
-    public var inspections: [Inspections] = []
+    var inspections: [Inspections] = []
+    @Relationship(deleteRule: .cascade)
+    var tasks: [BeekeepingTask] = []
     
-    public var apiary: Apiary?
+    var apiary: Apiary?
     
     init(
         inspections: [Inspections],

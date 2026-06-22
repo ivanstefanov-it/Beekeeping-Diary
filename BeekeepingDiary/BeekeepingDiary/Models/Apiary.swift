@@ -4,12 +4,14 @@ import Foundation
 @Model
 class Apiary: Identifiable {
     var id = UUID()
-    public var name: String
-    public var city: String
-    public var registrationNumber: String
+    var name: String
+    var city: String
+    var registrationNumber: String
     
     @Relationship(deleteRule: .cascade)
-    public var hives: [Hive]
+    var hives: [Hive]
+    @Relationship(deleteRule: .cascade)
+    var tasks: [BeekeepingTask] = []
     
     init(
         name: String,

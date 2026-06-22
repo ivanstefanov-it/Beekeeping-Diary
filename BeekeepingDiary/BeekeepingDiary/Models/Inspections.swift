@@ -4,26 +4,26 @@ import Foundation
 @Model
 class Inspections: Identifiable {
     var id = UUID()
-    public var haveQueen: Bool
-    public var numbersOfOccupiedFrames: Int
-    public var areEggsPresented: Bool
-    public var areQueenCellsPresented: Bool
-    public var areDroneCellsPresented: Bool
-    public var numberOfFreeFrames: FramesCount
-    public var pollen: FramesCount
-    public var honey: FramesCount
-    public var cappedBrood: FramesCount
-    public var uncappedBrood: FramesCount
-    public var colonyStrenght: ColonyStrenght?
-    public var broodPattern: BroodPattern?
-    public var beeBehavior: BeeBehavior?
-    public var pestsAndDiseases: PestsAndDiseases?
-    public var hiveHygiene: HiveHygiene?
-    public var swormingState: SwormState?
-    public var notes: String
-    public var dateOfCreation: Date
+    var haveQueen: Bool
+    var numbersOfOccupiedFrames: Int
+    var areEggsPresented: Bool
+    var areQueenCellsPresented: Bool
+    var areDroneCellsPresented: Bool
+    var numberOfFreeFrames: FramesCount
+    var pollen: FramesCount
+    var honey: FramesCount
+    var cappedBrood: FramesCount
+    var uncappedBrood: FramesCount
+    var colonyStrenght: ColonyStrenght?
+    var broodPattern: BroodPattern?
+    var beeBehavior: BeeBehavior?
+    var pestsAndDiseases: PestsAndDiseases?
+    var hiveHygiene: HiveHygiene?
+    var swormingState: SwormState?
+    var notes: String
+    var dateOfCreation: Date
     
-    public var hive: Hive?
+    var hive: Hive?
     
     enum ColonyStrenght: String, Codable, CaseIterable, Identifiable {
         case weak = "Weak colony"
