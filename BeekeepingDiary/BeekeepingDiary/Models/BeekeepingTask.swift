@@ -22,30 +22,30 @@ class BeekeepingTask: Identifiable {
     var hive: Hive?
     
     enum TaskType: String, Codable, CaseIterable, Identifiable {
-        case inspection
-        case feeding
-        case treatment
-        case queenReplacement
-        case addSuper
-        case harvestHoney
-        case migration
-        case custom
+        case inspection = "Inspection"
+        case feeding = "Feeding"
+        case treatment = "Treatment"
+        case queenReplacement = "Queen replacement"
+        case addSuper = "Add super"
+        case harvestHoney = "Harvest Honey"
+        case migration = "Migration"
+        case custom = "Custom"
         
         var id: Self { self }
     }
     
     enum TaskStatus: String, Codable, CaseIterable, Identifiable {
-        case pending
-        case completed
-        case cancelled
+        case pending = "Pending"
+        case completed = "Completed"
+        case cancelled = "Cancelled"
         
         var id: Self { self }
     }
     
     enum TaskPriority: String, Codable, CaseIterable, Identifiable {
-        case low
-        case medium
-        case high
+        case low = "Low"
+        case medium = "Medium"
+        case high = "High"
         
         var id: Self { self }
     }
