@@ -331,7 +331,8 @@ struct HiveDetailScreen: View {
             )],
             hiveType: .dadant,
             numberOfFrames: 10,
-            image: nil
+            image: nil,
+            queenColor: .none
         )
     )
 }

@@ -364,5 +364,5 @@ struct AddNewInspectionScreen: View {
 }
 
 #Preview {
-    AddNewInspectionScreen(hive: .init(inspections: [], hiveType: .dadant, numberOfFrames: 10))
+    AddNewInspectionScreen(hive: .init(inspections: [], hiveType: .dadant, numberOfFrames: 10, queenColor: .none))
 }

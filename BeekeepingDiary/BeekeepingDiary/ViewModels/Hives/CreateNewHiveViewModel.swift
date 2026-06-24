@@ -8,6 +8,7 @@ class CreateNewHiveViewModel {
     var numberOfFrames: Int = 0
     var imageData: Data? = nil
     var previewImage: UIImage? = nil
+    var queenColor: QueenColor = .none
     
     func setImage(_ image: UIImage?) {
         guard let image else {
@@ -44,7 +45,8 @@ class CreateNewHiveViewModel {
             inspections: [],
             hiveType: hiveType,
             numberOfFrames: numberOfFrames,
-            image: imageData
+            image: imageData,
+            queenColor: queenColor
         )
         
         hive.apiary = apiary

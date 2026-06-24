@@ -56,9 +56,34 @@ struct AddNewHiveScreen: View {
                             Text($0.rawValue)
                         }
                     }
-                    
-                    TextField("Number of frames", value: $viewModel.numberOfFrames, format: .number)
-                        .keyboardType(.numberPad)
+
+                    HStack {
+                        Text("Frames")
+
+                        Spacer()
+
+                        TextField("10", value: $viewModel.numberOfFrames, format: .number)
+                            .multilineTextAlignment(.trailing)
+                            .keyboardType(.numberPad)
+                            .frame(width: 60)
+                    }
+
+                    Picker("Queen Color", selection: $viewModel.queenColor) {
+                        ForEach(QueenColor.allCases, id: \.self) { color in
+                            Label {
+                                Text(color.displayName)
+                            } icon: {
+                                Circle()
+                                    .fill(color.swiftUIColor)
+                                    .overlay {
+                                            Circle()
+                                                .stroke(Color.gray, lineWidth: 1)
+                                        }
+                            }
+                            .tag(color)
+                        }
+                    }
+                    .pickerStyle(.navigationLink)
                 }
             }
             .navigationTitle("New Hive")
@@ -145,7 +170,8 @@ struct AddNewHiveScreen: View {
                 )],
                 hiveType: .langstroth,
                 numberOfFrames: 10,
-                image: nil
+                image: nil,
+                queenColor: .none
             )]
         )
     )
