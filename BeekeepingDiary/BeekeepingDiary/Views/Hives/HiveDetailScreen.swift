@@ -142,10 +142,29 @@ struct HiveDetailScreen: View {
     
     struct HiveHeaderCard: View {
         let hive: Hive
+        @Environment(\.colorScheme) var colorScheme
+        
+        var cardGradient: LinearGradient {
+            if colorScheme == .dark {
+                LinearGradient(
+                    colors: [
+                        Color.orange.opacity(0.35),
+                        Color(red: 0.45, green: 0.25, blue: 0.05).opacity(0.45)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            } else {
+                LinearGradient(
+                    colors: [.yellow.opacity(0.3), .orange.opacity(0.2)],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            }
+        }
 
         var body: some View {
             ZStack(alignment: .bottomLeading) {
-
                 if let data = hive.image,
                    let image = UIImage(data: data) {
 
@@ -154,15 +173,28 @@ struct HiveDetailScreen: View {
                         .scaledToFill()
 
                 } else {
-                    LinearGradient(
-                        colors: [.yellow.opacity(0.3), .orange.opacity(0.2)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
+                    cardGradient
 
-                    Image(systemName: "shippingbox.fill")
-                        .font(.system(size: 60))
-                        .foregroundStyle(.orange.opacity(0.6))
+                    HStack {
+                        Spacer()
+                        VStack {
+                            HStack {
+                                Image("queen_bee")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 52, height: 52)
+
+                                Circle()
+                                    .fill(hive.queenColor.swiftUIColor)
+                                    .frame(width: 18, height: 18)
+                            }
+                            
+                            Image(systemName: "shippingbox.fill")
+                                .font(.system(size: 60))
+                                .foregroundStyle(.orange.opacity(0.6))
+                                .padding()
+                        }
+                    }
                 }
 
                 VStack(alignment: .leading) {
@@ -332,7 +364,7 @@ struct HiveDetailScreen: View {
             hiveType: .dadant,
             numberOfFrames: 10,
             image: nil,
-            queenColor: .none
+            queenColor: .red
         )
     )
 }
