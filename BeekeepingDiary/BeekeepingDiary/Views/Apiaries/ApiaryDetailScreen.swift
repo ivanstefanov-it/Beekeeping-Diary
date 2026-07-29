@@ -92,13 +92,8 @@ struct ApiaryDetailScreen: View {
                             .buttonStyle(.plain)
                             .contextMenu {
                                 Button(role: .destructive) {
-                                    if let index = viewModel.sortedHivesByFrames.firstIndex(where: { $0.id == hive.id }) {
-                                        withAnimation {
-                                            viewModel.delete(
-                                                modelContext: modelContext,
-                                                IndexSet(integer: index)
-                                            )
-                                        }
+                                    withAnimation {
+                                        viewModel.delete(modelContext: modelContext, hive: hive)
                                     }
                                 } label: {
                                     Label("Delete", systemImage: "trash")

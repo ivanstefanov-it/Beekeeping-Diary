@@ -10,16 +10,8 @@ class HiveDetailViewModel {
         self.hive = hive
     }
     
-    func delete(modelContext: ModelContext, _ indexSet: IndexSet) {
-        for i in indexSet {
-            let inspection = hive.inspections[i]
-            modelContext.delete(inspection)
-        }
-        
-        do {
-            try modelContext.save()
-        } catch {
-            print("Failed to delete inspection:", error)
-        }
+    func delete(modelContext: ModelContext, inspection: Inspections) {
+        modelContext.delete(inspection)
+        try? modelContext.save()
     }
 }
