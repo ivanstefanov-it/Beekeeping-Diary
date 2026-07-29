@@ -5,6 +5,7 @@ struct AddNewHiveScreen: View {
     let apiary: Apiary
     
     @Environment(\.modelContext) private var context
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
     
     @State private var viewModel = CreateNewHiveViewModel()
@@ -68,22 +69,53 @@ struct AddNewHiveScreen: View {
                             .frame(width: 60)
                     }
 
-                    Picker("Queen Color", selection: $viewModel.queenColor) {
-                        ForEach(QueenColor.allCases, id: \.self) { color in
-                            Label {
-                                Text(color.displayName)
-                            } icon: {
-                                Circle()
-                                    .fill(color.swiftUIColor)
-                                    .overlay {
-                                            Circle()
-                                                .stroke(Color.gray, lineWidth: 1)
+                    NavigationLink {
+                        List {
+                            ForEach(QueenColor.allCases, id: \.self) { color in
+                                Button {
+                                    viewModel.queenColor = color
+                                } label: {
+                                    HStack {
+                                        Circle()
+                                            .fill(color.swiftUIColor)
+                                            .frame(width: 20, height: 20)
+                                            .overlay {
+                                                Circle()
+                                                    .stroke(.gray, lineWidth: 1)
+                                            }
+
+                                        Text(color.displayName)
+
+                                        Spacer()
+
+                                        if viewModel.queenColor == color {
+                                            Image(systemName: "checkmark")
+                                                .foregroundStyle(colorScheme == .dark ? .white : .black)
                                         }
+                                    }
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .tag(color)
+                        }
+                        .navigationTitle("Queen Color")
+                    } label: {
+                        HStack {
+                            Text("Queen Color")
+
+                            Spacer()
+
+                            Circle()
+                                .fill(viewModel.queenColor.swiftUIColor)
+                                .frame(width: 16, height: 16)
+                                .overlay {
+                                    Circle()
+                                        .stroke(.gray, lineWidth: 1)
+                                }
+
+                            Text(viewModel.queenColor.shortDisplayName)
+                                .foregroundStyle(.secondary)
                         }
                     }
-                    .pickerStyle(.navigationLink)
                 }
             }
             .navigationTitle("New Hive")

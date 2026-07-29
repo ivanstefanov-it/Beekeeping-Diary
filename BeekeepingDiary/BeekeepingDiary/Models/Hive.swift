@@ -54,6 +54,17 @@ enum QueenColor: String, Codable, Hashable, CaseIterable {
     case green
     case none
     
+    var shortDisplayName: String {
+        switch self {
+        case .blue: "Blue"
+        case .white: "White"
+        case .yellow: "Yellow"
+        case .red: "Red"
+        case .green: "Green"
+        case .none: "No Mark"
+        }
+    }
+    
     var displayName: String {
         switch self {
         case .blue: "Blue (Years ending in 0 or 5)"
